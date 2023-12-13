@@ -19,18 +19,15 @@
         color="white"
         placeholder="forest"
         v-model="searchTerm"
+        @input="searchImage"
       />
     </UFormGroup>
   </div>
-  <span
-    class="text-gray-400 text-sm bg-slate-800 px-2 max-w-fit py-1 rounded-md"
-  >
-    {{ url }}
-  </span>
   <UDivider label="OR" />
   <GeneratorFileUpload @url="fileUploaded" />
 </template>
 <script setup>
+import { useDebounceFn } from "@vueuse/core";
 import { IMAGE_PROVIDERS } from "~/constants/index";
 
 const emit = defineEmits(["imageSelected"]);
@@ -42,15 +39,12 @@ const providerLabel = computed(() => {
 });
 
 const searchTerm = ref("");
-const url = computed(() => {
+const searchImage = useDebounceFn(() => {
   const url = `${selectedProvider.value}?${searchTerm.value.split(" ")[0]}`;
   if (searchTerm.value && searchTerm.value.length > 2) {
-    setTimeout(() => {
-      emit("imageSelected", url);
-    }, 600);
+    emit("imageSelected", url);
   }
-  return url;
-});
+}, 1000);
 
 const fileUploaded = (e) => {
   emit("imageSelected", e);

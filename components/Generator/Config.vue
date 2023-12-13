@@ -66,6 +66,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useDebounceFn } from "@vueuse/core";
 import {
   BACKGROUND_TYPES,
   BACKGROUND_TYPE_COLOR,
@@ -82,11 +83,7 @@ const config = ref({
   backgroundType: "color",
   textColor: "#ffffff",
   bgColor: "#184e77",
-  gradient: {
-    from: "#0123de",
-    via: "#fc026c",
-    to: "#1ee103",
-  },
+  gradient: "linear-gradient(#0123de, #fc026c, #1ee103)",
   bgImage: "",
   platform: "",
   bgMask: {
@@ -113,7 +110,7 @@ const getPostStyle = (postData: any) => {
     };
   } else if (postData.backgroundType === "gradient") {
     return {
-      background: `linear-gradient(${postData.gradient.from}, ${postData.gradient.via}, ${postData.gradient.to})`,
+      background: postData.gradient,
       color: postData.textColor,
     };
   } else {
@@ -137,7 +134,7 @@ const getImageTypes = (postSpecs: any) => {
   });
 };
 
-watchDeep(config, (obj) => {
+const updateConfigStore = useDebounceFn((obj) => {
   const imageTypes = getImageTypes(obj);
   const postStyle = getPostStyle(obj);
   const payload = {
@@ -145,9 +142,11 @@ watchDeep(config, (obj) => {
     availableImageTypes: imageTypes,
     bgStyle: postStyle,
   };
-  setTimeout(() => {
-    updateConfig(payload);
-  }, 600)
+  updateConfig(payload);
+}, 1000)
+
+watchDeep(config, (obj) => {
+  updateConfigStore(obj)
 });
 </script>
 <style>

@@ -38,21 +38,28 @@ const SOCIAL_MEDIA_IMAGE_SIZES: any = {
   },
 };
 
-const IMAGE_TYPES = ['basic']
+const IMAGE_TYPES = ["basic"];
 
 const ORIENTATION_IMAGE_SIZES: any = {
   landscape: {
-    width: '100%',
-    height: '600px',
+    width: "100%",
+    height: "600px",
   },
   portrait: {
-    width: '600px',
-    height: '800px',
+    width: "600px",
+    height: "800px",
   },
   square: {
-    width: '600px',
-    height: '600px',
+    width: "600px",
+    height: "600px",
   },
-}
+};
 
-export { SOCIAL_MEDIA_IMAGE_SIZES, IMAGE_TYPES, ORIENTATION_IMAGE_SIZES };
+const GRADIENT_TYPES = ["linear", "radial", "conic"];
+
+export {
+  SOCIAL_MEDIA_IMAGE_SIZES,
+  IMAGE_TYPES,
+  ORIENTATION_IMAGE_SIZES,
+  GRADIENT_TYPES,
+};

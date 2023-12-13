@@ -143,7 +143,7 @@ const updateConfigStore = useDebounceFn((obj) => {
     bgStyle: postStyle,
   };
   updateConfig(payload);
-}, 1000)
+}, 600)
 
 watchDeep(config, (obj) => {
   updateConfigStore(obj)

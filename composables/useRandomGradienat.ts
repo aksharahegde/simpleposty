@@ -9,7 +9,9 @@ const getRandomColor = () => {
 
 export const useRandomGradient = (numberOfColors: number): any => {
   if (numberOfColors < 2 || numberOfColors > 3) {
-    console.error("Invalid number of colors provided. Number of colors must be 2 or 3.");
+    console.error(
+      "Invalid number of colors provided. Number of colors must be 2 or 3."
+    );
     return;
   }
 
@@ -19,12 +21,8 @@ export const useRandomGradient = (numberOfColors: number): any => {
   }
 
   const [from, via, to] = colors;
-
-  // If numberOfColors is 2, return { from, to }
   if (numberOfColors === 2) {
-    return { from, to };
+    return { from, to: via || to };
   }
-
-  // If numberOfColors is 3, return { from, via, to }
   return { from, via, to };
 };

@@ -44,7 +44,7 @@ const searchImage = useDebounceFn(() => {
   if (searchTerm.value && searchTerm.value.length > 2) {
     emit("imageSelected", url);
   }
-}, 1000);
+}, 600);
 
 const fileUploaded = (e) => {
   emit("imageSelected", e);

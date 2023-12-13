@@ -76,9 +76,28 @@ const generateGradientString = (gradientType: any, gradientObject: any) => {
     return;
   }
 
-  const viaPart = via ? `, ${via}` : '';
-
-  return `${gradientType}-gradient(${from}${viaPart}, ${to})`;
+  if (gradientType === "linear") {
+    if (via) {
+      return `linear-gradient(75deg, ${from} 0%, ${via} 50%, ${to} 100%)`;
+    } else {
+      return `linear-gradient(75deg, ${from} 0%, ${to} 100%)`;
+    }
+  } else if (gradientType === "radial") {
+    if (via) {
+      return `radial-gradient(circle, ${from} 0%, ${via} 50%, ${to} 100%)`;
+    } else {
+      return `radial-gradient(circle, ${from} 0%, ${to} 100%)`;
+    }
+  } else if (gradientType === "conic") {
+    if (via) {
+      return `conic-gradient(from 180deg at 50% 50%, ${from} 0%, ${via} 50%, ${to} 100%)`;
+    } else {
+      return `conic-gradient(from 180deg at 50% 50%, ${from} 0%, ${to} 100%)`;
+    }
+  } else {
+    console.error("Invalid gradient type provided");
+    return;
+  }
 };
 
 const geadientTypeChanged = () => {

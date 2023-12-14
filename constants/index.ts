@@ -17,16 +17,8 @@ const BACKGROUND_TYPES = [
   },
 ];
 
-const IMAGE_PROVIDERS = [
-  {
-    name: "Unsplash",
-    id: "https://source.unsplash.com/1600x900/",
-  },
-];
-
 export {
   BACKGROUND_TYPES,
-  IMAGE_PROVIDERS,
   BACKGROUND_TYPE_COLOR,
   BACKGROUND_TYPE_GRADIENT,
   BACKGROUND_TYPE_IMAGE,

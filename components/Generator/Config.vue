@@ -87,9 +87,9 @@ const config = ref({
   bgImage: "",
   platform: "",
   bgMask: {
-    blur: '',
-    color: ''
-  }
+    blur: "",
+    color: "",
+  },
 });
 
 const { updateConfig }: any = useCounterStore();
@@ -102,7 +102,7 @@ const gradientUpdated = (gradient: any) => {
   config.value.gradient = gradient;
 };
 
-const getPostStyle = (postData: any) => {
+const getPostStyle = async (postData: any) => {
   if (postData.backgroundType === "color") {
     return {
       "background-color": postData.bgColor,
@@ -114,6 +114,9 @@ const getPostStyle = (postData: any) => {
       color: postData.textColor,
     };
   } else {
+    if (!postData.bgImage) {
+      postData.bgImage = await useFetchImage("https://source.unsplash.com/1600x900/?black");
+    }
     return {
       "background-image": `url(${postData.bgImage})`,
       "background-size": "cover",
@@ -134,19 +137,20 @@ const getImageTypes = (postSpecs: any) => {
   });
 };
 
-const updateConfigStore = useDebounceFn((obj) => {
+const updateConfigStore = useDebounceFn(async (obj) => {
   const imageTypes = getImageTypes(obj);
-  const postStyle = getPostStyle(obj);
+  const postStyle = await getPostStyle(obj);
   const payload = {
     ...obj,
     availableImageTypes: imageTypes,
     bgStyle: postStyle,
   };
+  console.log(payload);
   updateConfig(payload);
-}, 600)
+}, 600);
 
 watchDeep(config, (obj) => {
-  updateConfigStore(obj)
+  updateConfigStore(obj);
 });
 </script>
 <style>

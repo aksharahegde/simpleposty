@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="h-[500px] w-full">
-      <img :src="convertedPreview" />
+      <img :src="convertedPreview" oncontextmenu="return false" />
     </div>
     <div class="h-[500px] w-full">
       <div
@@ -33,20 +33,21 @@
         class="rounded-lg shadow-lg relative overflow-hidden"
         :style="previewStyle"
       >
-        <div class="absolute left-0 top-0 right-0 bottom-0 bg-gray-800 bg-opacity-90" />
-        <div
-          class="px-6 py-4 absolute inset-0 bg-transparent"
-          :style="{ color: postConfig.textColor || '#ffffff' }"
-        >
-          <h2 class="mb-2 font-bold" :style="fontSize.heading">
-            {{ postConfig.title }}
-          </h2>
-          <p
-            class="text-xl font-normal leading-relaxed mt-5"
-            :style="fontSize.paragraph"
+        <div class="bg-gray-900 bg-opacity-90">
+          <div
+            class="px-6 py-4 absolute inset-0 bg-transparent"
+            :style="{ color: postConfig.textColor || '#ffffff' }"
           >
-            {{ postConfig.description }}
-          </p>
+            <h2 class="mb-2 font-bold" :style="fontSize.heading">
+              {{ postConfig.title }}
+            </h2>
+            <p
+              class="text-xl font-normal leading-relaxed mt-5"
+              :style="fontSize.paragraph"
+            >
+              {{ postConfig.description }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -79,10 +80,10 @@ watchDeep(postConfig, (obj) => {
 const previewStyle = ref({});
 const fontSize = ref({
   heading: {
-    fontSize: ''
+    fontSize: "",
   },
   paragraph: {
-    fontSize: ''
+    fontSize: "",
   },
 });
 const selectedImageType = ref("");
@@ -96,13 +97,11 @@ const setPreviewSize = () => {
   showPreview.value = true;
   const postSize = getImageOptions();
   fontSize.value = useFontSize(postSize);
-  console.log(JSON.stringify(fontSize.value));
   previewStyle.value = {
     ...postConfig.value.bgStyle,
     width: postSize.width,
     height: postSize.height,
   };
-  console.log(JSON.stringify(previewStyle.value));
   setTimeout(() => {
     domtoimage
       .toPng(document.getElementById("post-preview") as any, getImageOptions())

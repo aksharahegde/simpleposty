@@ -1,13 +1,13 @@
 <template>
   <div class="relative min-h-screen bg-red-50 dark:bg-gray-900">
     <Icon
-      name="solar:notes-minimalistic-bold-duotone"
-      class="absolute top-2 right-2 opacity-5 text-lime-400 text-[55rem]"
+      name="i-solar-notes-minimalistic-bold-duotone"
+      class="absolute top-2 right-2 opacity-5 text-gray-400 text-[55rem]"
     />
 
     <Icon
       name="solar:notes-minimalistic-bold-duotone"
-      class="absolute top-2 left-2 opacity-5 text-lime-400 text-[55rem]"
+      class="absolute top-2 left-2 opacity-5 text-gray-400 text-[55rem]"
     />
 
     <div class="px-4 py-16 w-full min-h-screen">
@@ -18,7 +18,7 @@
         >
           <Icon
             name="solar:document-add-bold-duotone"
-            class="absolute top-2 group-hover:rotate-12 transition-all duration-500 group-hover:text-lime-400 right-2 text-[12rem] opacity-10"
+            class="absolute top-2 group-hover:rotate-12 transition-all duration-500 group-hover:text-primary-400 right-2 text-[12rem] opacity-10"
           />
           <p
             tabindex="0"
@@ -33,7 +33,7 @@
           </p>
           <div class="py-4">
             <UButton
-              color="lime"
+              color="white"
               size="lg"
               class="mt-4"
               @click="initGoogleLogin"

@@ -1,6 +1,6 @@
 <template>
   <UContainer>
-    <HomeHeader />
+    <Header />
     <GeneratorMain />
   </UContainer>
 </template>

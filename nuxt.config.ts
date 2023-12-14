@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@vueuse/nuxt", "@nuxtjs/supabase"],
+  modules: ["@nuxt/ui", "@vueuse/nuxt", "@nuxtjs/supabase", "@nuxtseo/module"],
   ui: {
     primary: "teal",
     gray: "cool",

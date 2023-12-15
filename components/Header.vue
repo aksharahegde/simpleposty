@@ -5,9 +5,7 @@
     <div
       class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between gap-3 h-16 relative"
     >
-      <div class="lg:flex-1 flex items-center gap-1.5">
-        <Logo />
-      </div>
+      <Logo />
       <div class="flex items-center gap-2">
         <ThemeToggle />
         <UButton
@@ -16,8 +14,7 @@
           variant="solid"
           to="/login"
           icon="i-solar-login-2-line-duotone"
-          >Login</UButton
-        >
+        >Login</UButton>
         <UserMenu v-else />
       </div>
     </div>

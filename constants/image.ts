@@ -1,4 +1,13 @@
 const SOCIAL_MEDIA_IMAGE_SIZES: any = {
+  x: {
+    // profile_picture: { width: 400, height: 400 },
+    post: { width: 1200, height: 675 },
+    banner: { width: 1500, height: 500 },
+  },
+  linkedin: {
+    banner: { width: 1584, height: 396 },
+    post: { width: 1200, height: 627 },
+  },
   facebook: {
     // profile_picture: { width: 180, height: 180 },
     cover_photo: { width: 820, height: 312 },
@@ -6,27 +15,13 @@ const SOCIAL_MEDIA_IMAGE_SIZES: any = {
     shared_link: { width: 1200, height: 627 },
     highlighted_image: { width: 1200, height: 717 },
   },
-  x: {
-    // profile_picture: { width: 400, height: 400 },
-    header_image: { width: 1500, height: 500 },
-    stream_image: { width: 1200, height: 675 },
-  },
   instagram: {
     // profile_picture: { width: 110, height: 110 },
     // photo_thumbnails: { width: 161, height: 161 },
-    photo_size: { width: 1080, height: 1080 },
-    story_size: { width: 1080, height: 1920 },
+    post: { width: 1080, height: 1080 },
+    story: { width: 1080, height: 1920 },
   },
-  linkedin: {
-    personal_profile: {
-      background_image: { width: 1584, height: 396 },
-      // profile_picture: { width: 400, height: 400 },
-    },
-    // company_page: {
-    //   logo: { width: 300, height: 300 },
-    //   cover_image: { width: 1128, height: 191 },
-    // },
-  },
+
   pinterest: {
     // profile_picture: { width: 165, height: 165 },
     pin_size: { width: 1000, height: 1500 },

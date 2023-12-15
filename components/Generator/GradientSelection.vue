@@ -77,10 +77,11 @@ const generateGradientString = (gradientType: any, gradientObject: any) => {
   }
 
   if (gradientType === "linear") {
+    const orientation = useRandomDegree();
     if (via) {
-      return `linear-gradient(75deg, ${from} 0%, ${via} 50%, ${to} 100%)`;
+      return `linear-gradient(${orientation}deg, ${from} 0%, ${via} 50%, ${to} 100%)`;
     } else {
-      return `linear-gradient(75deg, ${from} 0%, ${to} 100%)`;
+      return `linear-gradient(${orientation}deg, ${from} 0%, ${to} 100%)`;
     }
   } else if (gradientType === "radial") {
     if (via) {

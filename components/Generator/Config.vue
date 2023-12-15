@@ -24,8 +24,8 @@
       <UButton
         v-if="user"
         color="white"
-        variant="ghost"
-        size="lg"
+        variant="solid"
+        label="Save"
         icon="i-solar-file-bold-duotone"
         :disabled="isSavingSettings"
         @click.stop="saveSettings"
@@ -204,6 +204,6 @@ const saveSettings = async () => {
 </script>
 <style>
 .background-type fieldset div {
-  @apply mb-1;
+  @apply mb-1 inline mx-2;
 }
 </style>

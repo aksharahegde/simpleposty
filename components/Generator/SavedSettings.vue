@@ -131,10 +131,14 @@ onBeforeMount(() => {
   isModalOpen.value = props.isOpen;
 });
 
-let { data: post_settings, error } = await supabase
+const post_settings = ref([]);
+
+const { data, error } = await supabase
   .from("post_settings")
   .select("*")
   .eq("user_id", user.value?.id);
+
+post_settings.value = data;
 
 const deletePostSetting = async (id) => {
   deleting.value = true;
@@ -154,9 +158,10 @@ const deletePostSetting = async (id) => {
       icon: "i-solar-check-circle-line-duotone",
       color: "green",
     });
-    post_settings.value.splice(
-      post_settings.value.findIndex((setting) => setting.id === id)
+    const deletdIndex = post_settings.value.findIndex(
+      (setting) => setting.id === id
     );
+    post_settings.value.splice(deletdIndex, 1);
   }
 };
 const close = () => {

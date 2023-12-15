@@ -26,7 +26,7 @@
     <div class="h-[500px] w-full">
       <img :src="convertedPreview" oncontextmenu="return false" />
     </div>
-    <div class="h-[500px] w-full">
+    <div class="h-[500px] w-full hidden">
       <div
         v-if="postConfig && showPreview"
         id="post-preview"

@@ -164,7 +164,6 @@ const updateConfigStore = useDebounceFn(async (obj) => {
     availableImageTypes: imageTypes,
     bgStyle: postStyle,
   };
-  console.log(payload);
   updateConfig(payload);
 }, 600);
 

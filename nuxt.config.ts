@@ -17,4 +17,14 @@ export default defineNuxtConfig({
       exclude: ["/"],
     },
   },
+  site: {
+    url: 'https://simpleposty.vercel.app',
+    name: 'Simple Posty | Create Social Media Posts',
+    description: 'Create beautiful social media posts with just a few clicks',
+    defaultLocale: 'en',
+    identity: {
+      type: 'Person'
+    },
+    twitter: '@akshara_dev',
+  }
 });

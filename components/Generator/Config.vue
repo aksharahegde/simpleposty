@@ -17,7 +17,20 @@
         :rows="6"
       />
     </UFormGroup>
-    <h2 class="text-lg text-gray-700 dark:text-gray-300">Customization</h2>
+    <div class="flex justify-between items-center">
+      <h2 class="text-lg text-gray-700 font-semibold dark:text-gray-300">
+        Customization
+      </h2>
+      <UButton
+        v-if="user"
+        color="white"
+        variant="ghost"
+        size="lg"
+        icon="i-solar-file-bold-duotone"
+        :disabled="isSavingSettings"
+        @click.stop="saveSettings"
+      />
+    </div>
     <UFormGroup label="Text Color" class="w-full">
       <UInput
         size="lg"
@@ -76,6 +89,12 @@ import {
 import { watchDeep } from "@vueuse/core";
 import { SOCIAL_MEDIA_IMAGE_SIZES } from "~/constants/image";
 
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
+const toast = useToast();
+const { updateConfig }: any = useCounterStore();
+const isSavingSettings = ref(false);
+
 const config = ref({
   title: "Let the fun begin!",
   description:
@@ -91,8 +110,6 @@ const config = ref({
     color: "",
   },
 });
-
-const { updateConfig }: any = useCounterStore();
 
 const platformUpdated = (platform: string) => {
   config.value.platform = platform;
@@ -115,7 +132,9 @@ const getPostStyle = async (postData: any) => {
     };
   } else {
     if (!postData.bgImage) {
-      postData.bgImage = await useFetchImage("https://source.unsplash.com/1600x900/?black");
+      postData.bgImage = await useFetchImage(
+        "https://source.unsplash.com/1600x900/?black"
+      );
     }
     return {
       "background-image": `url(${postData.bgImage})`,
@@ -152,6 +171,36 @@ const updateConfigStore = useDebounceFn(async (obj) => {
 watchDeep(config, (obj) => {
   updateConfigStore(obj);
 });
+
+const saveSettings = async () => {
+  isSavingSettings.value = true;
+  const { data, error } = await supabase
+    .from("post_settings")
+    .insert({
+      label: useLabel(user.value?.email as any),
+      config: config.value,
+      created_at: new Date(),
+      user_id: user.value?.id,
+    } as any)
+    .select();
+  isSavingSettings.value = false;
+
+  if (error) {
+    toast.add({
+      title: "Faile to save",
+      description: "Please try again",
+      icon: "i-solar-warning-circle-line-duotone",
+      color: "red",
+    });
+  } else {
+    toast.add({
+      title: "Settings saved",
+      description: "Your settings have been saved",
+      icon: "i-solar-check-circle-line-duotone",
+      color: "green",
+    });
+  }
+};
 </script>
 <style>
 .background-type fieldset div {

@@ -2,7 +2,7 @@
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
-console.log(user.value);
+const isSavedOpen = ref(false);
 
 const signOut = async () => {
   const { error } = await supabase.auth.signOut();
@@ -21,6 +21,7 @@ const items = [
     {
       label: "Settings",
       icon: "i-solar-settings-bold",
+      click: () => (isSavedOpen.value = true),
     },
   ],
   [
@@ -48,11 +49,8 @@ const items = [
 <template>
   <UDropdown
     :items="items"
-    :ui="{ item: { disabled: 'cursor-text select-text' } }"
-    :popper="{ placement: 'bottom-start' }"
   >
     <UAvatar :src="user.user_metadata.picture" />
-
     <template #account="{ item }">
       <div class="text-left">
         <p>Signed in as</p>
@@ -61,14 +59,17 @@ const items = [
         </p>
       </div>
     </template>
-
     <template #item="{ item }">
       <span class="truncate">{{ item.label }}</span>
-
       <UIcon
         :name="item.icon"
         class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
       />
     </template>
   </UDropdown>
+  <GeneratorSavedSettings
+    v-if="isSavedOpen"
+    :is-open="isSavedOpen"
+    @close="isSavedOpen = false"
+  />
 </template>

@@ -1,25 +1,20 @@
-export const useAspectRatio = (originalSize: ImageSize, containerSize?: ImageSize): ImageSize => {
+export const useAspectRatio = (
+  originalSize: ImageSize,
+  containerSize?: ImageSize
+): ImageSize => {
   if (!containerSize) {
-    return originalSize; // If no container size is specified, return the original size
+    return originalSize;
   }
 
-  const aspectRatio = originalSize.width / originalSize.height;
+  const widthScale = containerSize.width / originalSize.width;
+  const heightScale = containerSize.height / originalSize.height;
 
-  // Calculate new dimensions based on container size while maintaining the aspect ratio
-  const maxWidth = containerSize.width;
-  const maxHeight = containerSize.height;
+  // Use the smaller scaling factor to maintain the aspect ratio
+  const scale = Math.min(widthScale, heightScale);
 
-  let newWidth = maxWidth;
-  let newHeight = maxWidth / aspectRatio;
+  // Apply the scaled dimensions to the image
+  const scaledWidth = containerSize.width * scale;
+  const scaledHeight = containerSize.height * scale;
 
-  if (newHeight > maxHeight) {
-    // If the calculated height exceeds the container height, adjust both height and width
-    newHeight = maxHeight;
-    newWidth = maxHeight * aspectRatio;
-  }
-
-  return {
-    width: newWidth,
-    height: newHeight,
-  };
-}
+  return { width: scaledWidth, height: scaledHeight };
+};

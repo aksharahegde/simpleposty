@@ -14,9 +14,9 @@ dependencies:
   '@nuxt/ui':
     specifier: ^2.11.0
     version: 2.11.0(nuxt@3.8.2)(vite@5.0.6)(vue@3.3.10)
-  dom-to-image:
-    specifier: ^2.6.0
-    version: 2.6.0
+  modern-screenshot:
+    specifier: ^4.4.36
+    version: 4.4.36
 
 devDependencies:
   '@nuxt/devtools':
@@ -40,6 +40,9 @@ devDependencies:
   nuxt:
     specifier: ^3.8.2
     version: 3.8.2(vite@5.0.6)
+  nuxt-og-image:
+    specifier: 3.0.0-rc.10
+    version: 3.0.0-rc.10(@nuxt/devtools@1.0.4)(@vue/compiler-core@3.3.10)(nuxt@3.8.2)(postcss@8.4.32)(vite@5.0.6)(vue@3.3.10)(webpack@5.89.0)
   vue:
     specifier: ^3.3.10
     version: 3.3.10
@@ -3872,10 +3875,6 @@ packages:
       domhandler: 5.0.3
       entities: 4.5.0
 
-  /dom-to-image@2.6.0:
-    resolution: {integrity: sha512-Dt0QdaHmLpjURjU7Tnu3AgYSF2LuOmksSGsUcE6ItvJoCWTBEmiMXcqBdNSAm9+QbbwD7JMoVsuuKX6ZVQv1qA==}
-    dev: false
-
   /domelementtype@2.3.0:
     resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
 
@@ -5323,6 +5322,10 @@ packages:
       pathe: 1.1.1
       pkg-types: 1.0.3
       ufo: 1.3.2
+
+  /modern-screenshot@4.4.36:
+    resolution: {integrity: sha512-Trz71g4sE+a0m408BTYem9KhbQTHKc4WvLKqPh0oOvr5PLTqvfnIO/r2nhjRH0qn34+hfBtKxjpK/l9Ylsv00g==}
+    dev: false
 
   /mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}

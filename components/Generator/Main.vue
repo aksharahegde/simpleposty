@@ -4,6 +4,3 @@
     <GeneratorPreview class="w-full lg:w-8/12" />
   </div>
 </template>
-<script setup>
-useProvideCounterStore({});
-</script>

@@ -100,20 +100,21 @@
             </div>
           </template>
           <div
-            class="h-20"
+            class="h-20 cursor-pointer"
             :style="{
               background:
                 post_setting.config.backgroundType === 'color'
                   ? post_setting.config.bgColor
                   : post_setting.config.gradient,
             }"
+            @click="applySetting(post_setting)"
           />
         </UCard>
       </div>
     </UCard>
   </UModal>
 </template>
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   isOpen: {
     type: Boolean,
@@ -124,6 +125,8 @@ const emit = defineEmits(["close"]);
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 const toast = useToast();
+const { updateConfig }: any = useCounterStore();
+
 const isModalOpen = ref(false);
 const deleting = ref(false);
 
@@ -131,16 +134,28 @@ onBeforeMount(() => {
   isModalOpen.value = props.isOpen;
 });
 
-const post_settings = ref([]);
+const post_settings: Ref<any[]> = ref([]);
 
 const { data, error } = await supabase
   .from("post_settings")
   .select("*")
-  .eq("user_id", user.value?.id);
+  .eq("user_id", user?.value?.id as string);
 
-post_settings.value = data;
+post_settings.value = data as any[];
 
-const deletePostSetting = async (id) => {
+const applySetting = async (obj: any) => {
+  const imageTypes = useImageTypes(obj.config);
+  const postStyle = await usePostStyle(obj.config);
+  const payload = {
+    ...obj.config,
+    availableImageTypes: imageTypes,
+    bgStyle: postStyle,
+  };
+  updateConfig(payload);
+  close();
+};
+
+const deletePostSetting = async (id: string) => {
   deleting.value = true;
   const { error } = await supabase.from("post_settings").delete().eq("id", id);
   deleting.value = false;

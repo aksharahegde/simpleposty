@@ -68,7 +68,6 @@ const config = ref({
 const gradientType = ref("linear");
 
 const generateGradientString = (gradientType: any, gradientObject: any) => {
-  console.log(gradientObject);
   const { from, via, to } = gradientObject;
 
   if (!from || !to) {

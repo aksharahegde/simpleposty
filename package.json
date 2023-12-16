@@ -17,6 +17,7 @@
     "@vueuse/core": "^10.7.0",
     "@vueuse/nuxt": "^10.7.0",
     "nuxt": "^3.8.2",
+    "nuxt-og-image": "3.0.0-rc.10",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5"
   },
@@ -24,6 +25,6 @@
     "@iconify-json/simple-icons": "^1.1.82",
     "@iconify-json/solar": "^1.1.8",
     "@nuxt/ui": "^2.11.0",
-    "dom-to-image": "^2.6.0"
+    "modern-screenshot": "^4.4.36"
   }
 }

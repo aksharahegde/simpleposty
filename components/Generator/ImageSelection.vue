@@ -27,7 +27,7 @@
   </div>
   <UDivider label="OR" />
   <UButton
-    @click="getRandomImage"
+    @click="getImage('https://source.unsplash.com/random/1280x720')"
     :disabled="fetchingImage"
     class="w-1/2 mx-auto justify-center"
   >
@@ -38,9 +38,13 @@
     {{ fetchingImage ? "Fetching..." : "Random Image" }}
   </UButton>
   <UDivider label="OR" />
-  <GeneratorFileUpload @url="fileUploaded" />
+  <GeneratorFileUpload
+    :custom-classes="'w-full h-24'"
+    :show-label="true"
+    @url="fileUploaded"
+  />
 </template>
-<script setup>
+<script setup lang="ts">
 import { useDebounceFn } from "@vueuse/core";
 import { IMAGE_PROVIDERS } from "~/constants/image";
 
@@ -51,26 +55,27 @@ const searchTerm = ref("");
 const selectedProvider = ref(IMAGE_PROVIDERS[0].id);
 
 const providerLabel = computed(() => {
-  const provider = IMAGE_PROVIDERS.find((p) => p.id === selectedProvider.value);
+  const provider: any = IMAGE_PROVIDERS.find(
+    (p) => p.id === selectedProvider.value
+  );
   return provider.name;
 });
 
 const searchImage = useDebounceFn(() => {
   const url = `${selectedProvider.value}?${searchTerm.value.split(" ")[0]}`;
   if (searchTerm.value && searchTerm.value.length > 2) {
-    emit("imageSelected", url);
+    getImage(url);
   }
 }, 600);
 
-const getRandomImage = async () => {
+const getImage = async (url: string) => {
   fetchingImage.value = true;
-  const url = await useFetchImage(
-    `https://source.unsplash.com/random/1280x720`
-  );
-  emit("imageSelected", url);
+  const dataUrl = await useFetchImage(url);
+  emit("imageSelected", dataUrl);
   fetchingImage.value = false;
 };
-const fileUploaded = (e) => {
+
+const fileUploaded = (e: any) => {
   emit("imageSelected", e);
 };
 </script>

@@ -47,9 +47,7 @@ const items = [
 </script>
 
 <template>
-  <UDropdown
-    :items="items"
-  >
+  <UDropdown :items="items">
     <UAvatar :src="user.user_metadata.picture" />
     <template #account="{ item }">
       <div class="text-left">

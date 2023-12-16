@@ -8,7 +8,6 @@ export const useFetchImage = async (imageUrl: string) => {
       reader.onerror = reject;
       reader.readAsDataURL(blob);
     });
-    console.log(dataUrl);
     return dataUrl;
   } catch (error) {
     console.error("Error fetching image:", error);

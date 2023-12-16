@@ -31,51 +31,61 @@
         @click.stop="saveSettings"
       />
     </div>
-    <UFormGroup label="Text Color" class="w-full">
-      <UInput
-        size="lg"
-        color="white"
-        type="color"
-        v-model="config.textColor"
-        :ui="{
-          base: 'w-10 h-10 cursor-pointer',
-          padding: { lg: 'py-0 px-1' },
-          rounded: 'rounded-full',
-        }"
-      />
-    </UFormGroup>
-    <URadioGroup
-      v-model="config.backgroundType"
-      legend="Background type"
-      class="background-type"
-      :options="BACKGROUND_TYPES"
-    />
-    <UFormGroup
-      v-if="config.backgroundType === BACKGROUND_TYPE_COLOR"
-      class="w-full"
+    <div class="flex items-center">
+      <UFormGroup label="Text Color" class="w-1/3">
+        <UInput
+          size="lg"
+          color="white"
+          type="color"
+          v-model="config.textColor"
+          :ui="{
+            base: 'w-10 h-10 cursor-pointer',
+            padding: { lg: 'py-0 px-1' },
+            rounded: 'rounded-full',
+          }"
+        />
+      </UFormGroup>
+      <UFormGroup label="Font size" class="w-2/3">
+        <URange color="primary" v-model="config.fontSize" />
+      </UFormGroup>
+    </div>
+    <div
+      class="p-3 flex flex-col rounded-md gap-4 bg-gray-100 dark:bg-gray-900"
     >
-      <UInput
-        size="lg"
-        color="white"
-        placeholder="Background Color"
-        type="color"
-        v-model="config.bgColor"
-        :ui="{
-          base: 'w-10 h-10 cursor-pointer',
-          padding: { lg: 'py-0 px-1' },
-          rounded: 'rounded-full',
-        }"
+      <URadioGroup
+        v-model="config.backgroundType"
+        legend="Background type"
+        class="background-type"
+        :options="BACKGROUND_TYPES"
       />
-    </UFormGroup>
-    <GeneratorGradientSelection
-      v-else-if="config.backgroundType === BACKGROUND_TYPE_GRADIENT"
-      @gradient="gradientUpdated"
-    />
-    <GeneratorImageSelection
-      v-else-if="config.backgroundType === BACKGROUND_TYPE_IMAGE"
-      @imageSelected="config.bgImage = $event"
-    />
+      <UFormGroup
+        v-if="config.backgroundType === BACKGROUND_TYPE_COLOR"
+        class="w-full"
+      >
+        <UInput
+          size="lg"
+          color="white"
+          placeholder="Background Color"
+          type="color"
+          v-model="config.bgColor"
+          :ui="{
+            base: 'w-10 h-10 cursor-pointer',
+            padding: { lg: 'py-0 px-1' },
+            rounded: 'rounded-full',
+          }"
+        />
+      </UFormGroup>
+      <GeneratorGradientSelection
+        v-else-if="config.backgroundType === BACKGROUND_TYPE_GRADIENT"
+        @gradient="gradientUpdated"
+      />
+      <GeneratorImageSelection
+        v-else-if="config.backgroundType === BACKGROUND_TYPE_IMAGE"
+        @imageSelected="config.bgImage = $event"
+      />
+    </div>
     <GeneratorSocialMedia @platform="platformUpdated" />
+    <GeneratorSocialTag @updated="socialBadgeUpdated" />
   </div>
 </template>
 <script setup lang="ts">
@@ -87,7 +97,6 @@ import {
   BACKGROUND_TYPE_IMAGE,
 } from "~/constants/index";
 import { watchDeep } from "@vueuse/core";
-import { SOCIAL_MEDIA_IMAGE_SIZES } from "~/constants/image";
 
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
@@ -101,6 +110,7 @@ const config = ref({
     "It's time to let loose and have some fun! Whether it's a wild party, a laid-back get-together, or a solo dance party in your living room, it's all about embracing the moment and making some unforgettable memories. So grab a drink, put on your dancing shoes, and let the good times roll!",
   backgroundType: "color",
   textColor: "#ffffff",
+  fontSize: 38,
   bgColor: "#184e77",
   gradient: "linear-gradient(#0123de, #fc026c, #1ee103)",
   bgImage: "",
@@ -108,6 +118,12 @@ const config = ref({
   bgMask: {
     blur: "",
     color: "",
+  },
+  avatar: {
+    show: true,
+    name: user.value?.user_metadata.name,
+    username: user.value?.user_metadata.email,
+    avatar: "",
   },
 });
 
@@ -119,53 +135,20 @@ const gradientUpdated = (gradient: any) => {
   config.value.gradient = gradient;
 };
 
-const getPostStyle = async (postData: any) => {
-  if (postData.backgroundType === "color") {
-    return {
-      "background-color": postData.bgColor,
-      color: postData.textColor,
-    };
-  } else if (postData.backgroundType === "gradient") {
-    return {
-      background: postData.gradient,
-      color: postData.textColor,
-    };
-  } else {
-    if (!postData.bgImage) {
-      postData.bgImage = await useFetchImage(
-        "https://source.unsplash.com/1600x900/?black"
-      );
-    }
-    return {
-      "background-image": `url(${postData.bgImage})`,
-      "background-size": "cover",
-      "background-repeat": "no-repeat",
-      "background-position": "center",
-    };
-  }
-};
-
-const getImageTypes = (postSpecs: any) => {
-  const selectedOption: string = postSpecs.platform;
-  const aspectRatios = SOCIAL_MEDIA_IMAGE_SIZES[selectedOption];
-  return Object.keys(aspectRatios).map((val) => {
-    return {
-      label: val.replaceAll("_", " "),
-      value: val,
-    };
-  });
+const socialBadgeUpdated = (badge: any) => {
+  config.value.avatar = badge;
 };
 
 const updateConfigStore = useDebounceFn(async (obj) => {
-  const imageTypes = getImageTypes(obj);
-  const postStyle = await getPostStyle(obj);
+  const imageTypes = useImageTypes(obj);
+  const postStyle = await usePostStyle(obj);
   const payload = {
     ...obj,
     availableImageTypes: imageTypes,
     bgStyle: postStyle,
   };
   updateConfig(payload);
-}, 600);
+}, 300);
 
 watchDeep(config, (obj) => {
   updateConfigStore(obj);

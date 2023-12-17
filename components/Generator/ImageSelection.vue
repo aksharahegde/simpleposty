@@ -24,6 +24,16 @@
         @input="searchImage"
       />
     </UFormGroup>
+    <UButton
+      @click="randomizeSearch"
+      :disabled="fetchingImage"
+      class="w-8 mb-0.5 h-9 mt-auto"
+    >
+      <template #leading>
+        <Icon name="solar:refresh-line-duotone" v-if="fetchingImage" />
+        <Icon name="solar:shuffle-line-duotone" v-else />
+      </template>
+    </UButton>
   </div>
   <UDivider label="OR" />
   <UButton
@@ -61,10 +71,16 @@ const providerLabel = computed(() => {
   return provider.name;
 });
 
+const getUrl = () => `${selectedProvider.value}?${searchTerm.value.split(" ")[0]}`;
+
+const randomizeSearch = () => {
+  const url = getUrl()
+  getImage(url)
+}
+
 const searchImage = useDebounceFn(() => {
-  const url = `${selectedProvider.value}?${searchTerm.value.split(" ")[0]}`;
   if (searchTerm.value && searchTerm.value.length > 2) {
-    getImage(url);
+    getImage(getUrl());
   }
 }, 600);
 

@@ -26,7 +26,7 @@
     </div>
     <div class="h-[500px] w-full">
       <div
-        v-if="postConfig"
+        v-if="showPreview && postConfig"
         id="post-preview"
         class="shadow-lg relative overflow-hidden h-full"
         :style="previewStyle"
@@ -60,6 +60,7 @@
           </div>
         </div>
       </div>
+      <USkeleton v-else class="w-full h-full" />
     </div>
   </div>
 </template>
@@ -69,7 +70,6 @@ import { domToPng } from "modern-screenshot";
 import { SOCIAL_MEDIA_IMAGE_SIZES } from "~/constants/image";
 
 const { postConfig } = useCounterStore() as any;
-
 const showPreview = ref(false);
 const selectedImageType = ref("");
 const selectedPlatform = ref("");

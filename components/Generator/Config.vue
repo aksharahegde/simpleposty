@@ -121,8 +121,8 @@ const config = ref({
   },
   avatar: {
     show: true,
-    name: user.value?.user_metadata.name,
-    username: user.value?.user_metadata.email,
+    name: user.value?.user_metadata.name || 'Fullname',
+    username: user.value?.user_metadata.email || '@username',
     avatar: "",
   },
 });

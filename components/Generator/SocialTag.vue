@@ -10,7 +10,7 @@
         @url="config.avatar = $event"
       />
       <div class="flex flex-col gap-2">
-        <UInput size="lg" color="white" v-model="config.name" />
+        <UInput size="lg" color="white" v-model="config.name" placeholder="Name" />
         <UInput
           size="lg"
           color="white"

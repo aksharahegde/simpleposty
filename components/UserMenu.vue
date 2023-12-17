@@ -33,7 +33,7 @@ const items = [
     {
       label: "Github",
       icon: "i-simple-icons-github",
-      href: "https://github.com/aksharahegde",
+      href: "https://github.com/aksharahegde/simpleposty",
     },
   ],
   [

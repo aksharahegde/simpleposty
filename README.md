@@ -44,12 +44,18 @@
 
 ### Todo
 [ ] Add Pexels API as image provider.
+
 [ ] Text to image for background.
+
 [ ] Support for image background in saved configurations.
+
 [ ] Aspect ratio issue.
+
 [ ] Card type selection
-    [ ] Style (Gradient, Glassy, with image, With icon, Border styles)
-    [ ] Dark/light mode
+
+- Style (Gradient, Glassy, with image, With icon, Border styles)
+    
+- Dark/light mode
 
 ### Local Setup
 1. Clone the repo

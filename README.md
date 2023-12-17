@@ -1,4 +1,4 @@
-# SimplePosty
+# ![Logo](/public/favicon-32x32.png) SimplePosty 
 ##### Create beautiful social media image with just a few clicks for free.
 
 #### Features
@@ -23,6 +23,24 @@
     - Youtube
 5. Download image
 6. Save configuration (only for color and gradients for now)
+
+### Screenshots
+1. Color Background
+![Color Background](/public/ss_color_bg.png)
+
+2. Gradient Background
+![Gradient Background](/public/ss_gradient_bg.png)
+
+3. Photo Background
+![Photo Background](/public/ss_photo_bg.png)
+
+4. Saved Settings
+![Saved Settings](/public/ss_saved_settings.png)
+
+5. Output
+   
+![Output](/public/ss_output.png)
+
 
 ### Todo
 [ ] Add Pexels API as image provider.

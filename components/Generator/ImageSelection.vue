@@ -49,6 +49,7 @@
   </UButton>
   <UDivider label="OR" />
   <GeneratorFileUpload
+    id="bg-upload"
     :custom-classes="'w-full h-24'"
     :show-label="true"
     @url="fileUploaded"
@@ -71,12 +72,13 @@ const providerLabel = computed(() => {
   return provider.name;
 });
 
-const getUrl = () => `${selectedProvider.value}?${searchTerm.value.split(" ")[0]}`;
+const getUrl = () =>
+  `${selectedProvider.value}?${searchTerm.value.split(" ")[0]}`;
 
 const randomizeSearch = () => {
-  const url = getUrl()
-  getImage(url)
-}
+  const url = getUrl();
+  getImage(url);
+};
 
 const searchImage = useDebounceFn(() => {
   if (searchTerm.value && searchTerm.value.length > 2) {

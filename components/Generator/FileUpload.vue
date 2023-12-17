@@ -2,8 +2,8 @@
   <div ref="dropZoneRef">
     <div class="flex items-center justify-center w-full">
       <label
-        for="dropzone-file"
         class="flex flex-col items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+        :for="id"
         :class="customClasses"
       >
         <div class="flex items-center justify-center gap-3 pt-5 pb-6">
@@ -19,12 +19,7 @@
             <p class="text-xs text-gray-500 dark:text-gray-400">svg, png jpg</p>
           </div>
         </div>
-        <input
-          id="dropzone-file"
-          type="file"
-          class="hidden"
-          @input="fileUploaded"
-        />
+        <input :id="id" type="file" class="hidden" @input="fileUploaded" />
       </label>
     </div>
   </div>
@@ -32,12 +27,11 @@
 <script setup lang="ts">
 import { useDropZone } from "@vueuse/core";
 
-const props = defineProps(["customClasses", "showLabel"]);
+const props = defineProps(["customClasses", "showLabel", "id"]);
 const { customClasses, showLabel } = props;
 
 const emit = defineEmits(["url"]);
 const toast = useToast();
-
 const dropZoneRef = ref<HTMLDivElement>();
 
 const processFile = (file: File) => {

@@ -14,7 +14,7 @@
           :class="{
             'dark:text-primary-500 text-primary-500': name === selectedPlatform,
           }"
-          class="w-8 h-8 cursor-pointer hover:dark:text-primary-500 text-gray-400 dark:text-gray-600"
+          class="w-8 h-8 cursor-pointer hover:dark:text-primary-500 text-gray-700 dark:text-gray-600"
           @click="selectPlatform(name)"
         />
       </UTooltip>

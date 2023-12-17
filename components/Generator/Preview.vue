@@ -47,14 +47,14 @@
         </div>
         <div
           v-if="postConfig.avatar && postConfig.avatar.show"
-          class="rounded-full flex px-3 py-2 absolute bottom-2 items-center gap-2 right-2 shadow-lg bg-primary-900/75 backdrop-blur-xl"
+          class="rounded-full flex px-3 py-2 absolute bottom-2 items-center gap-2 right-2 shadow-lg bg-gray-800/50 backdrop-blur"
         >
           <UAvatar
             :src="postConfig.avatar.avatar"
             :alt="postConfig.avatar.name"
             size="xl"
           />
-          <div class="text-white flex-col flex">
+          <div class="text-white flex-col flex max-w-xs truncate">
             <span>{{ postConfig.avatar.name }}</span>
             <span class="text-sm">{{ postConfig.avatar.username }}</span>
           </div>

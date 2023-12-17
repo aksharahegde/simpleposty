@@ -20,8 +20,8 @@ useHead({
   link: [
     {
       rel: "icon",
-      type: "image/jpg",
-      href: "/icon.jpg",
+      type: "image/png",
+      href: "/icon.png",
     },
   ],
 });

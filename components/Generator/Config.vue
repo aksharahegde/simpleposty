@@ -26,7 +26,7 @@
         color="white"
         variant="solid"
         label="Save"
-        icon="i-solar-file-bold-duotone"
+        icon="i-solar-file-outline"
         :disabled="isSavingSettings"
         @click.stop="saveSettings"
       />

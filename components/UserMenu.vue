@@ -65,7 +65,7 @@ const items = [
       />
     </template>
   </UDropdown>
-  <GeneratorSavedSettings
+  <GeneratorSavedSettingsMain
     v-if="isSavedOpen"
     :is-open="isSavedOpen"
     @close="isSavedOpen = false"

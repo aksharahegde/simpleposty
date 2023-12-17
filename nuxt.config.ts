@@ -26,8 +26,8 @@ export default defineNuxtConfig({
   },
   site: {
     url: "https://simpleposty.vercel.app",
-    name: "Simple Posty | Create Social Media Posts",
-    description: "Create beautiful social media posts with just a few clicks",
+    name: "Simple Posty | Free Social Media Posts",
+    description: "Create beautiful social media image with just a few clicks for free",
     image: "/og_image.jpg",
     defaultLocale: "en",
     identity: {

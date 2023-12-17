@@ -32,6 +32,7 @@ const config = ref({
   avatar: "",
   name: user.value?.user_metadata.name,
   username: user.value?.user_metadata.email,
+  background: "#000000",
 });
 
 watchDeep(config, (obj) => {

@@ -11,20 +11,20 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxtjs/supabase": "^1.1.4",
+    "@nuxtjs/supabase": "^1.1.5",
     "@nuxtseo/module": "2.0.0-beta.50",
     "@types/dom-to-image": "^2.6.7",
-    "@vueuse/core": "^10.7.0",
-    "@vueuse/nuxt": "^10.7.0",
-    "nuxt": "^3.8.2",
+    "@vueuse/core": "^10.7.1",
+    "@vueuse/nuxt": "^10.7.1",
+    "nuxt": "^3.9.0",
     "nuxt-og-image": "3.0.0-rc.10",
-    "vue": "^3.3.10",
+    "vue": "^3.4.3",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@iconify-json/simple-icons": "^1.1.82",
-    "@iconify-json/solar": "^1.1.8",
-    "@nuxt/ui": "^2.11.0",
-    "modern-screenshot": "^4.4.36"
+    "@iconify-json/simple-icons": "^1.1.86",
+    "@iconify-json/solar": "^1.1.9",
+    "@nuxt/ui": "^2.11.1",
+    "modern-screenshot": "^4.4.37"
   }
 }

@@ -4,8 +4,7 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@vueuse/nuxt",
     "@nuxtjs/supabase",
-    "@nuxtseo/module",
-    "nuxt-og-image",
+    "@nuxtseo/module"
   ],
   ui: {
     primary: "teal",
